@@ -51,4 +51,31 @@ public class Rekening {
             }
         }
     }
+
+
+    public boolean cekPin(String inputPin) {
+        return this.pemilik.cekPin(inputPin);
+    }
+
+    public String getNoRekening() {
+        return noRekening;
+    }
+
+    public double getSaldoMinimum() {
+        return saldoMinimum;
+    }
+
+    public void setSaldoMinimum(double saldoMinimum) {
+        if (saldoMinimum < 0) {
+            System.out.println("Gagal: Saldo minimum tidak boleh negatif");
+            return;
+        }
+        this.saldoMinimum = saldoMinimum;
+    }
+
+    public boolean memenuhiSaldoMinimum(double nominal) {
+        return (this.saldo - nominal) >= this.saldoMinimum;
+    }
+
 }
+
