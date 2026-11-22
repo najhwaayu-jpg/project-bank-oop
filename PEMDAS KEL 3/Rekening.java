@@ -76,6 +76,37 @@ public class Rekening {
     public boolean memenuhiSaldoMinimum(double nominal) {
         return (this.saldo - nominal) >= this.saldoMinimum;
     }
+    
+    public void setor(double nominal) {
+    if (nominal <= 0) {
+        System.out.println("Gagal: Nominal setoran harus lebih dari 0");
+        return;
+    }
+    this.saldo += nominal;
+    this.riwayat.add(new TransaksiBank("Setor Tunai", nominal, "Setoran berhasil"));
+    System.out.println("Setor tunai berhasil.");
+    System.out.println("Saldo sekarang: Rp" + this.saldo);
+    }
+
+    public void cekSaldo() {
+    System.out.println("Nomor Rekening: " + this.noRekening);
+    System.out.println("Saldo Anda: Rp" + this.saldo);
+    }
+
+
+    public void potongAdminBulanan() {
+    double biayaAdmin = 8000;
+    if (this.saldo < biayaAdmin) {
+        System.out.println("Gagal: Saldo tidak mencukupi untuk membayar biaya admin.");
+        return;
+    }
+    this.saldo -= biayaAdmin;
+    this.riwayat.add(new TransaksiBank("Biaya Admin Bulanan", biayaAdmin, "Pemotongan admin berhasil"));
+    System.out.println("Biaya admin Rp" + biayaAdmin + " berhasil dipotong.");
+    System.out.println("Sisa saldo: Rp" + this.saldo);
+    }
+
+
 
 }
 
