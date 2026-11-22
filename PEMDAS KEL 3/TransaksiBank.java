@@ -24,7 +24,7 @@ public class TransaksiBank {
         return nominal;
     }
 
-    public void setNominal() {
+    public void setNominal(double nominal) {
         this.nominal = nominal;
     }
 
@@ -32,7 +32,7 @@ public class TransaksiBank {
         return keterangan;
     }
 
-    public void setKeterangan() {
+    public void setKeterangan(String keterangan) {
         this.keterangan = keterangan;
     }
 

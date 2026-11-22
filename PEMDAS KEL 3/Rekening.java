@@ -106,6 +106,25 @@ public class Rekening {
     System.out.println("Sisa saldo: Rp" + this.saldo);
     }
 
+    public double getSaldo() {
+        return this.saldo;
+    }
+
+    public void setSaldo(double saldoBaru) {
+        if (saldoBaru < 0) {
+            System.out.println("Gagal: Saldo tidak boleh negatif.");
+            return;
+        }
+        this.saldo = saldoBaru;
+    }
+
+    public String getNamaBank() {
+        return this.namaBank;
+    }
+
+    public void tambahRiwayat(TransaksiBank transaksi) {
+        this.riwayat.add(transaksi);
+    }
 
 
 }

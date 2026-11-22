@@ -65,9 +65,16 @@ public class Main {
                 break;
 
                 case 3:
-                    // BAGIAN NEENA (TRANSFER)
-                    System.out.println("Fitur transfer belum tersedia");
+                   System.out.println("Masukkan nominal transfer: ");
+                    double nomTransfer = in.nextDouble();
+                    in.nextLine();
+                    System.out.println("Masukkan PIN: ");
+                    String pinTransfer = in.nextLine();
+
+                    Transfer layananTransfer = new Transfer(1000000, 6500);
+                    layananTransfer.prosesTransfer(rek1, rek2, nomTransfer, pinTransfer);
                     break;
+                    
                 case 4:
                     rek1.tampilkanRiwayat();
                     break;
