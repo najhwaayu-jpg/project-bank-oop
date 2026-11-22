@@ -1,97 +1,91 @@
 import java.util.Scanner;
-public class Main {
 
+public class Main {
     public static void main(String[] args) {
-   
+        Scanner in = new Scanner(System.in);
+
+        // Inisialisasi rekening utama & rekening tujuan transfer
         Nasabah nasabah1 = new Nasabah("orang", "123456");
         Rekening rek1 = new Rekening("1001", nasabah1, 500000, "Bank ghofar");
-        System.out.println("Rekening berhasil dibuka: " + rek1.getNoRekening());
 
-        // cek PIN
-        // System.out.println("PIN benar? " + rek1.cekPin("123456"));
-        // System.out.println("PIN salah? " + rek1.cekPin("000000"));
-        // saldo minimum
-        System.out.println("Saldo minimum: Rp" + rek1.getSaldoMinimum());
-        rek1.tarik(460000, "123456"); // sisa 40.000 < 50.000, harus gagal
-
-       // Setor tunai
-       System.out.println("Setor Tunai:");
-       rek1.setor(100000);
-
-    // Cek saldo
-    System.out.println("Cek Saldo:");
-    rek1.cekSaldo();
-
-    // Biaya admin bulanan
-    System.out.println("Biaya Admin Bulanan:");
-    rek1.potongAdminBulanan();
-
-    // Riwayat transaksi
-    System.out.println("Riwayat Transaksi:");
-    rek1.tampilkanRiwayat();
-        Scanner in = new Scanner(System.in);
-        // rekening kedua untuk bahan uji coba transfer
         Nasabah nasabah2 = new Nasabah("Budi", "654321");
         Rekening rek2 = new Rekening("1002", nasabah2, 200000, "Bank ghofar");
-        System.out.println("Rekening kedua berhasil dibuka: " + rek2.getNoRekening());
+
+        Transfer layananTransfer = new Transfer(1000000, 6500);
+
+        System.out.println("=== SELAMAT DATANG DI BANK GHOFAR ===");
+        System.out.println("Rekening Aktif : " + rek1.getNoRekening() + " (Saldo Awal: Rp" + rek1.getSaldo() + ")");
+        System.out.println("Rekening Tujuan: " + rek2.getNoRekening() + " (a.n. Budi)");
 
         int pilihan;
         do {
             System.out.println("\n=== MENU ATM BANK GHOFAR ===");
             System.out.println("1. Tarik Tunai");
-            System.out.println("2. Setor Tunai"); //NO 3 (AFIF)
-            System.out.println("3. Transfer ke Rek 1002"); //NO 4 (NEENA)
+            System.out.println("2. Setor Tunai");
+            System.out.println("3. Transfer ke Rek 1002");
             System.out.println("4. Riwayat Transaksi");
             System.out.println("5. Ubah Saldo Minimum");
+            System.out.println("6. Cek Saldo");
+            System.out.println("7. Potong Biaya Admin Bulanan");
             System.out.println("0. Keluar");
+            System.out.print("Pilih menu: ");
             pilihan = in.nextInt();
             in.nextLine();
 
             switch (pilihan) {
                 case 1:
-                    System.out.println("Masukan nominal tarik: ");
+                    System.out.print("Masukkan nominal tarik: ");
                     double nomTarik = in.nextDouble();
                     in.nextLine();
-                    System.out.println("Masukkan PIN: ");
+                    System.out.print("Masukkan PIN: ");
                     String pinTarik = in.nextLine();
                     rek1.tarik(nomTarik, pinTarik);
                     break;
 
-                case 2:                   
-                System.out.println("Masukkan nominal setoran: ");
-                double nominalSetor = in.nextDouble();
-                in.nextLine();
-                rek1.setor(nominalSetor);
-                break;
+                case 2:
+                    System.out.print("Masukkan nominal setoran: ");
+                    double nominalSetor = in.nextDouble();
+                    in.nextLine();
+                    rek1.setor(nominalSetor);
+                    break;
 
                 case 3:
-                   System.out.println("Masukkan nominal transfer: ");
+                    System.out.print("Masukkan nominal transfer: ");
                     double nomTransfer = in.nextDouble();
                     in.nextLine();
-                    System.out.println("Masukkan PIN: ");
+                    System.out.print("Masukkan PIN: ");
                     String pinTransfer = in.nextLine();
-
-                    Transfer layananTransfer = new Transfer(1000000, 6500);
                     layananTransfer.prosesTransfer(rek1, rek2, nomTransfer, pinTransfer);
                     break;
-                    
+
                 case 4:
                     rek1.tampilkanRiwayat();
                     break;
+
                 case 5:
-                    System.out.println("Masukkan saldo minimum baru: ");
+                    System.out.print("Masukkan saldo minimum baru: ");
                     double minBaru = in.nextDouble();
                     in.nextLine();
                     rek1.setSaldoMinimum(minBaru);
                     break;
-                case 0:
-                    System.out.println("Terimakasih");
-                    break;
-                default:
-                    System.out.println("Menu tidak valid");
 
+                case 6:
+                    rek1.cekSaldo();
+                    break;
+
+                case 7:
+                    rek1.potongAdminBulanan();
+                    break;
+
+                case 0:
+                    System.out.println("Terima kasih telah menggunakan layanan Bank Ghofar.");
+                    break;
+
+                default:
+                    System.out.println("Menu tidak valid. Silakan pilih 0-7.");
             }
         } while (pilihan != 0);
+
         in.close();
     }
 }

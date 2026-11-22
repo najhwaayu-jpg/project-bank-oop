@@ -1,9 +1,9 @@
 
 public class TransaksiBank {
 
-    public String jenisTransaksi;
-    public double nominal;
-    public String keterangan;
+    private String jenisTransaksi;
+    private double nominal;
+    private String keterangan;
 
     public TransaksiBank(String jenisTransaksi, double nominal, String keterangan) {
         this.jenisTransaksi = jenisTransaksi;
